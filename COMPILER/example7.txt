@@ -1,0 +1,11 @@
+Subject
+{ code		ID,
+  title 
+};
+
+Student
+{ snumber	ID,
+  last_name 
+};
+
+Subject(first_name) [*]Is_enrolled_by[*]Student;
