@@ -1,0 +1,12 @@
+body {
+	font-family:'Raleway', Arial;
+	font-size:1em;
+}
+.datatable {
+	background:#cdcdcd;
+	padding:1%;
+}
+
+.datatable tr {
+	background:#b0e0f2;
+}
