@@ -1,0 +1,10 @@
+<!ELEMENT root ( Person+ )>
+<!ELEMENT Person ( ssno, name, date_of_birth, address, age, email+, phone*, country?) >
+<!ELEMENT ssno (#PCDATA) >
+<!ELEMENT name (#PCDATA) >
+<!ELEMENT date_of_birth (#PCDATA) >
+<!ELEMENT address (#PCDATA) >
+<!ELEMENT age (#PCDATA) >
+<!ELEMENT email (#PCDATA) >
+<!ELEMENT phone (#PCDATA) >
+<!ELEMENT country (#PCDATA) >
