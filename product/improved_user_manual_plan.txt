@@ -1,0 +1,14 @@
+Cover page
+Setup:
+	System requirements: Not even a section - just show in "intro section"
+	just a step-by-step guide -> all images with small annotations below them
+Creating an artifact:
+	- Product semantic overview (not a section, just a picture): 1 picture showing sys overview, and artifacts (need 2b careful with this... must look simple, not complex)
+	- Below the above picture, is the command line to run it
+	- Next page goes into detail of each parameter:
+		- Generating a graph
+		- Generating a DTD
+		- Generating a XML schema
+		- Generating a SQL script
+
+** then integrate all stuff studied in library **
