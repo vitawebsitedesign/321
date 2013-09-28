@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+targetNamespace= "http://www.w3schools.com" 
+xmlns ="http://www.w3schools.com" elementFormDefault="qualified"> 
+
+
+<xsd:element name = "root">
+   <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded" minOccurs ="0">
+             <xsd:element name = "A" maxOccurs="unbounded" minOccurs ="0" > 
+               <xsd:complexType>
+               </xsd:complexType>
+             </xsd:element>
+             <xsd:element name = "B" maxOccurs="unbounded" minOccurs=" 0" >
+               <xsd:complexType>
+               </xsd:complexType>
+             </xsd:element>
+      </xsd:choice>
+   </xsd:complexType>
+</xsd:element>
+</xsd:schema>

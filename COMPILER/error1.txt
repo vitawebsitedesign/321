@@ -1,0 +1,9 @@
+Person{ ssno			ID1,
+                name            ID1,    ID2,
+                date_of_birth           ID2,
+		address			ID2,
+		/age,
+		email [1..5],
+		phone[*],
+		hobbies[0..*],
+		country[0..1]	};

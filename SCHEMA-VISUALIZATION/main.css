@@ -1,0 +1,28 @@
+body {
+	background: url('img/bg.png') 50% 50%;
+	font-family: 'Open Sans', Arial;
+	font-size:0.8em;
+}
+
+.class {
+	/* Background gradient */
+	background: #a9db80; /* Old browsers */
+	background: -moz-linear-gradient(top,  #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #a9db80 0%,#96c56f 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #a9db80 0%,#96c56f 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+
+	border-radius:10px;
+	padding:10px;
+	position:absolute;
+}
+.class:active {
+	box-shadow:25px 15px 0px 0px rgba(10, 10, 10, 0.1);
+}
+.att {
+	color:white;
+	margin:0px 0px 5px 5px;
+}

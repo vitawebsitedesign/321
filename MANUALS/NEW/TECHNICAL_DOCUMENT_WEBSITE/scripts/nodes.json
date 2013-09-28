@@ -1,0 +1,9 @@
+{
+nodes: {
+'parent': {'color':'gray','shape':'dot','label':'Some parent node'},
+'child': {'color':'gray','shape':'dot','label':'Some child node'}
+},
+edges: {
+'parent': {'child':{}}
+}
+}

@@ -1,0 +1,15 @@
+A{};
+B{};
+
+A AS a [1..*]Has_description B AS b;
+
+C{};
+D{};
+
+C [0..1] Association{x,y,z} [0..*] D;
+
+E{};
+F{};
+G{};
+
+E [*] Association(q):G[1..*] F;
