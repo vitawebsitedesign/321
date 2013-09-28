@@ -1,0 +1,13 @@
+File_hierarchy{};
+
+File{file_name	ID};
+
+Data_file{};
+
+Directory_file{};
+
+File [1]Belongs_to[1] File_hierarchy;
+
+Data_file, Directory_file ISA(t-e) File;
+
+Directory_file AS parent(file_name)  [0..1]Contains[0..1] File AS child;
