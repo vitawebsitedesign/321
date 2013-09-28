@@ -1,4 +1,0 @@
-<!ELEMENT root ( A+, B* )>
-<!ELEMENT A (  #PCDATA ) >
-<!ELEMENT B ( IDREF )* >
-<!ELEMENT IDREF (#PCDATA) >
