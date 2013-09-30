@@ -1,5 +1,0 @@
-[28-Jul-2013 22:08:48 America/Phoenix] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home/unicodeo/public_html/321/scripts/diary-entry-add.php on line 7
-[28-Jul-2013 22:11:31 America/Phoenix] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/unicodeo/public_html/321/scripts/diary-entry-add.php on line 9
-[28-Jul-2013 22:12:34 America/Phoenix] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/unicodeo/public_html/321/scripts/diary-entry-add.php on line 9
-[28-Jul-2013 22:13:13 America/Phoenix] PHP Fatal error:  Call to a member function bind_param() on a non-object in /home/unicodeo/public_html/321/scripts/diary-entry-add.php on line 12
-[28-Jul-2013 22:19:41 America/Phoenix] PHP Parse error:  syntax error, unexpected ',' in /home/unicodeo/public_html/321/scripts/diary-entry-add.php on line 13

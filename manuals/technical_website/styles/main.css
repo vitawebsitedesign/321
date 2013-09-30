@@ -1,0 +1,14 @@
+html, body {
+	height:100%;
+	width:100%;
+}
+canvas {
+}
+
+#description-window{
+	bottom:40;
+	height:80px;
+	position:fixed;
+	right:40;
+	width:400px;	
+}
