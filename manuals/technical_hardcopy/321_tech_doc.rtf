@@ -1,0 +1,320 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang3081{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs36 struct declarations\par
+\fs22 node\par
+\tab char *class_name\par
+\tab\tab name of class\par
+\tab char *attribute_name\par
+\tab\tab type of element (e.g. "class", "attribute")\par
+\tab char *attribute_value\par
+\tab\tab name of element (e.g. "attribute" could be "MyAttribute")\par
+\tab char *attribute_multiplicity\par
+\tab\tab mulitplicity (e.g. [0..*])\par
+\tab char *attribute_id\par
+\tab\tab id (e.g. "ID")\par
+\tab int used\par
+\tab\tab changes from 0 to 1 when written to xml file\par
+\tab struct node *next\tab\par
+\tab\tab points to the next "class" node in the linked list "nodeList"\par
+\par
+Cname\par
+\tab char *name;\par
+\tab\tab class name\par
+\tab int displayInFile;\tab\par
+\tab\tab changes from 0 to 1 when written to xml file\par
+\tab struct Cname *next;\par
+\tab\tab points to next "class name" node in the linked list "nameList"\par
+\par
+AssociationClassNode\par
+\tab char *class_name\tab\tab\par
+\tab\tab name of association class\par
+\tab char *attribute_name\par
+\tab\tab type of element in association (e.g. "attribute")\par
+\tab char *attribute_value\par
+\tab\tab value of element (e.g. for an element of type "attribute", "myAttribute")\par
+\tab int displayInFile;\par
+\tab\tab changes from 0 to 1 when written to xml file\par
+\tab struct AssociationClassNode *next;\par
+\tab\tab points to the next "association class" node in the linked list "assNodeList"\par
+\par
+GeneralizationNode\par
+\tab char *attribute_name\par
+\tab\tab type of element (i.e. "child node" or "parent node")\par
+\tab char *attribute_value\par
+\tab\tab name of generalization class (e.g. "parent node" could be "MySuperClass")\par
+\tab int displayInFile\par
+\tab\tab changes from 0 to 1 when written to xml file\par
+\tab struct GeneralizationNode *next\par
+\tab\tab points to the next "generalization" node in the linked list "generalizationNodeList"\par
+\line\fs36 token declarations\fs22\par
+\b MAIN TOKENS\fs28\par
+\b0\fs22 class_definition\tab\tab\tab\tab\par
+\tab class_name LEFT_BRACKET definition RIGHT_BRACKET SEMICOLON\par
+\tab\tab Class1 \{\par
+\tab\tab\tab attribute1 ID,\par
+\tab\tab\tab attribute2\par
+\tab\tab\};\tab\tab\par
+\tab class_name LEFT_BRACKET RIGHT_BRACKET SEMICOLON\par
+\tab\tab Class 1 \{\par
+\tab\tab\};\par
+association\par
+\tab left_class association_specification right_class SEMICOLON\par
+\tab\tab Class1 [1]associationName[1] Class2;\par
+\tab\tab\par
+generalization\par
+\tab list_of_class ISA_KEYWORD generalization_type parentClass SEMICOLON\par
+\tab ChildClass1, ChildClass2 ISA(generalizationName) ParentClass;\par
+\par
+\b SUB TOKENS\b0\par
+class_name\par
+\tab VARIABLE\par
+\tab\tab MyClass\par
+definition\par
+\tab member_definition\par
+\tab\tab myAtribute\par
+\tab\tab myAttribute ID\par
+\tab\tab myAttribute[0..*]\par
+\tab\tab myAttribute[0..*] ID\par
+\tab definition COMMA member_definition\par
+\tab\tab myAttribute1,\par
+\tab\tab myAttribute2\par
+member_definition\par
+\tab VARIABLE\par
+\tab\tab myAttribute\par
+\tab VARIABLE id\par
+\tab\tab myAttribute ID\par
+\tab VARIABLE multiplicity\par
+\tab\tab myAttribute[0..*]\par
+id\par
+\tab ID\par
+\tab\tab ID1\par
+\par
+multiplicity\par
+\tab MULTIPLICITY\par
+\tab\tab [0..*]\par
+left_class\par
+\tab left_class_name left_class_role class_qualification\par
+\tab\tab MyClass(qualifiedAttribute)\par
+\tab\tab MyClass AS MyRole\par
+left_class_name\par
+\tab VARIABLE\tab\tab\par
+\tab\tab MyClass\par
+left_class_role\par
+\tab AS_KEYWORD VARIABLE\par
+\tab\tab AS MyRole\par
+class_qualification\par
+\tab LEFT_ROUND_BRACKET list_of_qualification RIGHT_ROUND_BRACKET\par
+\tab\tab (myQualificationName)\par
+\tab LEFT_ROUND_BRACKET RIGHT_ROUND_BRACKET\par
+\tab\tab ()\par
+\par
+list_of_qualification\par
+\tab VARIABLE\par
+\tab\tab myQualificationName\par
+\tab list_of_qualification COMMA VARIABLE\par
+\tab\tab myQualification1, myQualification2\par
+\par
+association_specification\par
+\tab association_multiplicity association_name list_of_attributes compulsory_multiplicity\par
+\tab\tab [1] myAssociation \{associationAttribute\} [1]\par
+\tab association_multiplicity association_name association_class_qualification COLON association_class_name compulsory_multiplicity\par
+\tab\tab [1] myAssociation (attributeQualifiedFromAssociationClass) : MyAssociationClass [1] \par
+\par
+association_multiplicity\par
+\tab MULTIPLICITY\par
+\tab\tab [1]\par
+\par
+association_name\par
+\tab VARIABLE\par
+\tab\tab myAssociation\tab\tab\par
+\tab\tab\par
+list_of_attributes\par
+\tab LEFT_BRACKET link_attribute RIGHT_BRACKET\par
+\tab\tab\{myAssociationAttribute\}\tab\tab\par
+\par
+link_attribute\par
+\tab VARIABLE\par
+\tab\tab myAssociationAttribute\par
+\tab link_attribute COMMA VARIABLE\par
+\tab\tab myAssociationAttribute1, myAssociationAttribute2\par
+\tab\tab\tab\par
+compulsory_multiplicity\par
+\tab MULTIPLICITY\par
+\tab\tab [1]\par
+\par
+association_class_qualification\par
+\tab LEFT_ROUND_BRACKET list_of_association_class_qualification RIGHT_ROUND_BRACKET\par
+\tab\tab (qualifiedAttribute1)\par
+\par
+list_of_association_class_qualification\par
+\tab VARIABLE\par
+\tab\tab qualifiedAttribute1\par
+\tab list_of_association_class_qualification COMMA VARIABLE\par
+\tab\tab qualifiedAttribute1, qualifiedAttribute2\par
+\par
+association_class_name\par
+\tab VARIABLE\par
+\tab\tab MyAssociationClass\par
+\tab\par
+right_class\par
+\tab class_qualification right_class_name right_class_role\par
+\tab\tab (qualifiedAttribute1) MyClass AS MyRole\par
+\par
+right_class_name\par
+\tab VARIABLE\par
+\tab\tab MyClass\par
+\par
+right_class_role\par
+\tab AS_KEYWORD VARIABLE\par
+\tab\tab AS MyRole\par
+\par
+list_of_class\par
+\tab VARIABLE\par
+\tab\tab MyClass1\par
+\tab list_of_class COMMA VARIABLE\par
+\tab\tab MyClass1, MyClass2\par
+\par
+generalization_type\par
+\tab GENERALIZATION_TYPE\par
+\tab\tab myGeneralizationName\par
+\par
+parentClass\par
+\tab VARIABLE\par
+\tab\tab MyParentClassOfGeneralization\par
+\par
+\fs36 function declarations\par
+\fs22 int main (number of arguments from command line, arguments from command line)\par
+\tab sets the file to parse (e.g. "example1.txt")\par
+\tab opens file to write to (i.e. "information.xml")\par
+\tab returns 0 if parse & write ok, returns 1 if it couldn't open the file to parse\par
+\par
+\b CLASS RELATED\b0\par
+int add_node(class name, attribute name, attribute multiplicity, attribute id)\par
+\tab adds an "attribute" node for a class to the end of the linked list for attributes ("nodeList")\par
+\tab always returns 0\par
+\par
+void add_name(new class name)\par
+\tab adds a "class name" node to the linked list for class names (nameList) \par
+\par
+int nameExist(class name to check)\par
+\tab checks if a class with a specific name has already been parsed, by traversing the linked list for class names (nameList)\par
+\tab Returns 1 if class found (i.e. its already been parsed). \par
+\tab Returns 0 if not found.\par
+\par
+int attributeExist(class name that the attribute exists in, attribute name)\par
+\tab checks if a class's attribute has already been parsed, by traversing the linked list for attribute names (nodeList)\tab\par
+\tab Returns 1 if attribute found (i.e. its already been parsed)\par
+\tab Returns 0 if not found\par
+\par
+void write_classDefinition(class name to write)\par
+\tab writes a class definition (i.e. class name and its attributes) to "information.xml"\par
+\par
+char *returnClassName()\par
+\tab Returns the class name thats ready to be written next to "information.xml"\par
+\tab the class name is fetched by traversing the linked list for associations (assNodeList), \tab and executing a "return" statement when it first encounters an association that hasn't been written yet (i.e. association.displayInFile == 0)\tab\par
+\par
+void resetClassName(new class name to parse)\par
+\tab after parsing a class, this function is called to set the currently parsed class name to the one thats being parsed.\par
+\tab for example: if Class1 has finished being parsed from "example1.txt" and Bison is now starting to parse Class2, the system needs to know that Class2 is being parsed now instead of Class1\par
+\tab it resets the class name that was being parsed, by traversing the linked list for associations (assNodeList), and overriding the class name that was previously parsed\par
+\par
+\b ASSOCIATION RELATED\b0\tab\par
+void addAssoNode(association name to attach node to, type of node, value of node)\par
+\tab an "association" token contains many "sub tokens", for example:\par
+\tab Class1 [*] associationName : associationClassName [*] Class2\par
+\tab Consists of sub tokens: left class name, multiplicity, association name, colon, association class name, multiplicity and a right class name\par
+\tab Hence, this function adds these "small tokens" to an association node stored in the linked list for associations (assNodeLIst)\par
+\par
+int associationAttributeExist(association name, node type, attribute name to check)\par
+\tab checks if a "sub token" for an association has already been parsed, by traversing the linked list for associations (assNodeList)\tab\par
+\tab Returns 1 if "sub token" is found\par
+\tab Returns 0 if not found\par
+\par
+void write_associationDefinition()\par
+\tab called after an association has finished being parsed\par
+\tab e.g. after parsing "Class1 [1] associationName [1] Class2"\par
+\tab it writes an association definition to "information.xml"\par
+\tab For example:\par
+\tab <association>\par
+\tab\tab <nameOfAssociation>myAssociation</nameOfAssociation>\par
+\tab\tab <class>\par
+\tab\tab\tab <class_name>Class1</class_name>\par
+\tab\tab\tab <multiplicity>[1]</multiplicity>\par
+\tab\tab\tab <role></role>\par
+\tab\tab\tab <qualification></qualification>\par
+\tab\tab </class>\par
+\tab\tab <other_class>\par
+\tab\tab\tab <class_name>Class2</class_name>\par
+\tab\tab\tab <multiplicity>[1]</multiplicity>\par
+\tab\tab\tab <role></role>\par
+\tab\tab\tab <qualification></qualification>\par
+\tab\tab </other_class>\par
+\tab\tab <Link></Link>\par
+\tab </association>\par
+\par
+void writeAssociationName(file pointer to "information.xml")\par
+\tab called when writing an association definition.\par
+\tab the XML for an association element is written in the format:\par
+\tab <association>\par
+\tab\tab <nameOfAssociation>Contains</nameOfAssociation>\par
+\tab\tab ...\par
+\tab </association>\par
+\tab this function writes the next association ready to be written (in the above case, "Contains") by traversing the linked list for associations (assNodeList) until it finds one thats ready to be written (i.e. association.displayInFile == 0)\tab\par
+\par
+void writeLeftMultiplicity(file pointer to "information.xml", class name that the multiplicity belongs to)\par
+\tab writes the multiplicity of a class to "information.xml"\par
+\tab example: "Class1 [1] myAssociation [*] Class2" in TCML will write "<multiplicity>[1]</multiplicity>" in XML\par
+\par
+void writeLeftRole(file pointer to "information.xml", class name that the role belongs to)\par
+\tab writes the role of a class to "information.xml"\par
+\tab example: "Class1 AS Role1 [1] myAssociation [*] Class2" in TCML will write "<role>Role1</role>" in XML\par
+\par
+void writeLeftQualification(file pointer to "information.xml", class name that the qualification belongs to)\par
+\tab writes the qualification of a class to "information.xml"\par
+\tab example: "Class1(qualifiedAttribute) [1] myAssociation [*] Class2" in TCML will write "<role>qualifiedAttribute</role>" in XML\par
+\par
+void writeRightMultiplicity(file pointer to "information.xml", class name that the multiplicity belongs to)\par
+\tab See "writeLeftMultiplicity()"; It writes the multiplicity for the right class instead of the left class\par
+\par
+void writeRightRole(file pointer to "information.xml", class name that the multiplicity belongs to)\par
+\tab See "writeLeftRole()"; It writes the role for the right class instead of the left class\par
+\par
+void writeRightQualification(file pointer to "information.xml", class that the qualification belongs to)\par
+\tab See "writeLeftQualification()"; It writes the qualification for the right class instead of the left class\par
+\par
+void writeLinkAttribute(file pointer to "information.xml")\par
+\tab writes an atribute for an association (NOT an assocation \b class\b0 )\par
+\tab it does this by ensuring that there IS actually an association attribute to be written by calling "checkLinkAttribute()", and then traversing the linked list for associations (assNodeList) until it finds the next attribute to be written.\par
+\tab after writing an attribute, it marks it as "written" (i.e. attribute.displayInFile = 1)\par
+\par
+int checkLinkAttribute()\par
+\tab checks if an attribute for an association (NOT an association \b class\b0 ) has already been parsed, by traversing the linked list for associations (assNodeList)\tab\par
+\tab Returns 1 if "sub token" is found\par
+\tab Returns 0 if not found\par
+\par
+void writeLinkAssociationClass(file pointer to "information.xml")\par
+\tab writes an association class to "information.xml"\par
+\tab it does this by ensuring that there is an association class ready to be written, by calling "checkLinkAssociationClass()". Then it traverses the linked list for association classes (assNodeList) until it finds an association class ready to be written (i.e. associationClass.displayInFile == 0). Finally, it writes to the XML\tab  file\par
+\par
+int checkLinkAssociationClass()\par
+\tab checks that an association class is ready to be written to "information.xml"\par
+\tab it does by traversing the linked list for associations (assNodeList) until it finds an association class that hasn't been marked as written (i.e. associationClass.displayInFile == 0), and then returns 1\par
+\tab Returns 0 if no association class is ready to be written\par
+\par
+void resetAssociationClassName(new association name to parse)\par
+\tab after parsing a class, this function is called to set the currently parsed association name to the one thats being parsed.\par
+\tab for example: if Class1 has finished being parsed from "example1.txt" and Bison is now starting to parse an association connecting from Class2 to another class, the system needs to know that the association currently being parsed is the one connected from Class2, rather than the previous association which was connected from Class1\par
+\tab it resets the association name that was being parsed, by traversing the linked list for associations (assNodeList), and overriding the association name that was previously parsed\par
+\par
+\b GENERALIZATION RELATED\b0\par
+void addGeneralizationNode(type of generalization node, generalization node name)\par
+\tab A generalization has a parent node, child nodes and a generalization name\par
+\tab this function adds either a parent node, child node or a node holding a generalization name to the linked list for generalizations (generalizationNodeList)\tab\par
+\par
+void writeGeneralization()\par
+\tab writes a generalization "sub tokens" (i.e. children classes, parent class and generalization name) to XML\par
+\tab it does this by opening a file pointer to "information.xml", traversing the linked list for generalization nodes (generalizationNodeList) until it finds the children classes, parent classes and generalization name ready to be written. \par
+\tab The matching logic is done by checking the nodes type (e.g. currentNode.attribute_name) against "CHILDREN_CLASS", "PARENT_CLASS" and "GENERALIZATION_TYPE".\par
+\tab Upon a successful match (e.g. currentNode.attribute_name == "CHILDREN_CLASS"), it writes the appropriate XML to "information.xml"\par
+\par
+}
+ 
