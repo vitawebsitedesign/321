@@ -1,9 +1,9 @@
 Person{ 	
-	ssno		ID1,
-	name		    ID2,
+	ssno		ID1 ID2ID3ID7 ID4 ID5,
+	name		ID1 ID2 ID3,
 	date_of_birth	ID2,
 	address		    ID2,
-	age,
+	/age,
 	email [1..5],
 	phone[*],
 	country[0..1]	
