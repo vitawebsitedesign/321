@@ -1,0 +1,2 @@
+line:1:	error: expected space need between two IDs
+line:1:	error: expected space need between two IDs

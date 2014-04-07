@@ -1,0 +1,1 @@
+var xml = "";var xmlDoc = $.parseXML(xml);
