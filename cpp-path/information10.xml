@@ -1,0 +1,16 @@
+<project>
+	<class>
+		<class_name>Male</class_name>
+	</class>
+	<class>
+		<class_name>Female</class_name>
+	</class>
+	<class>
+		<class_name>Person</class_name>
+	</class>
+	<generlisation>
+		<class_name>Female</class_name>
+		<ISA>Person</ISA>
+		<generalisation>(t-e)</generalisation>
+	</generlisation>
+</project>
