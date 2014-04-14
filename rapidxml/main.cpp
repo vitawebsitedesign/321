@@ -190,6 +190,7 @@ int main()
       bool tmp = false;
       for(int j=0;j<i;j++)
       {
+             
          string str1 = "........................Error: The class: ";
          string str2 = " has no identifer.....................";
          string str;
@@ -206,6 +207,10 @@ int main()
          if(tmp == false)
          {
          str = str1 + IDerror[j] + str2;
+          ofstream ofs;
+              ofs.open("../product/errorMessage.txt");
+              ofs << " ~Some error message yo" << endl;    
+              ofs.close();
            
           cout<<str<<endl;
          }

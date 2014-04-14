@@ -1,0 +1,11 @@
+Person{ ssno,
+	name,
+	date_of_birth,
+	address };
+
+Car{ rego,
+     producer,
+     model,
+     made };
+
+Person AS owner[1] Owns [1]Car;
