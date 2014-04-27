@@ -67,14 +67,14 @@
 typedef union YYSTYPE
 {
 
-/* Line 1740 of yacc.c  */
+/* Line 1676 of yacc.c  */
 #line 84 "compiler.y"
 
 	char *str;
 
 
 
-/* Line 1740 of yacc.c  */
+/* Line 1676 of yacc.c  */
 #line 79 "compiler.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1

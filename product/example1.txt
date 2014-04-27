@@ -1,10 +1,12 @@
-Person{ 	
-	ssno		ID1 ID2ID3ID7 ID4 ID5,
-	name		ID1 ID2 ID3,
-	date_of_birth	ID2,
-	address		    ID2,
-	/age,
-	email [1..5],
-	phone[*],
-	country[0..1]	
+Building
+{ building_number	ID,
+  name 
 };
+
+Room
+{ room_number,
+  area,
+  type 
+};
+
+Building(room_number)[1]Contains[0..1] Room;

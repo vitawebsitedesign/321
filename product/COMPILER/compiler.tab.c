@@ -208,14 +208,14 @@
 typedef union YYSTYPE
 {
 
-/* Line 222 of yacc.c  */
+/* Line 214 of yacc.c  */
 #line 84 "compiler.y"
 
 	char *str;
 
 
 
-/* Line 222 of yacc.c  */
+/* Line 214 of yacc.c  */
 #line 220 "compiler.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1

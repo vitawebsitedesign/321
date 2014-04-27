@@ -40,7 +40,6 @@ int yylineno = 0;
 		if(ignoreInput==0){
 			yylval.str=strdup(yytext);
 			add_token("","LEFT_BRACKET",yylval.str,yylineno);
-           
 			return LEFT_BRACKET;
 		}
 }
@@ -65,8 +64,7 @@ int yylineno = 0;
 ":"	{
 		if(ignoreInput==0){
 			add_token("ASSOCIATION","COLOM",yylval.str,yylineno);
-			
-                      return COLON;
+			return COLON;
 	}
 }
 
@@ -74,41 +72,29 @@ int yylineno = 0;
 "("	{
 		if(ignoreInput==0){
 			add_token("ASSOCIATION","LEFT_ROUND_BRACKET",yylval.str,yylineno);
-                     
-                      
 			return LEFT_ROUND_BRACKET;
-                       
 	}
 }
 
 ")"	{
 		if(ignoreInput==0){
 			add_token("ASSOCIATION","RIGHT_ROUND_BRACKET",yylval.str,yylineno);
-                       
-               
 			return RIGHT_ROUND_BRACKET;
 	}
 }
-("ID"[0-9]*)("ID"[0-9]*)+|("ID"[0-9]*" ")("ID"[0-9]*)+|("id"[0-9]*)("id"[0-9]*)+|("id"[0-9]*" ")("id"[0-9]*)+	{
-	yyerror(fileName,"expected space need between two IDs",yylineno);
-}
 
-
-("ID"[0-9]*" "+)*("ID"[0-9]*)|("id"[0-9]*" "+)*("id"[0-9]*)	{
+"ID"[0-9]*|"id"[0-9]*	{
 		if(ignoreInput==0){
 			yylval.str=strdup(yytext);
-                      //  printf(yylval.str);
 			add_token(className,"ID",yylval.str,yylineno);
 			return ID;
 		}
 }
 
-
 "AS"	{
 		if(ignoreInput==0){
 			yylval.str=strdup(yytext);
 			add_token("ASSOCIATION","AS_KEYWORD",yylval.str,yylineno);
-
 			return (AS_KEYWORD);
 	}
 }
@@ -121,11 +107,10 @@ int yylineno = 0;
 		}
 }
 
-[/]*[_a-zA-Z]*[a-zA-Z0-9]+[#]*[-]*[_]*[a-zA-Z]*	{
+[_a-zA-Z]*[a-zA-Z0-9]+[#]*[-]*[_]*[a-zA-Z]*	{
 		if(ignoreInput==0){
 			yylval.str=strdup(yytext);
 			add_token(className,"VARIABLE",yylval.str,yylineno);
-                     
 			return (VARIABLE);
 		}
 }
@@ -162,7 +147,6 @@ int yylineno = 0;
 		if(ignoreInput==0){
 			yylval.str=strdup(yytext);
 			add_token("GENERALIZATION","GENERALIZATION_TYPE",yylval.str,yylineno);
-
 			return (GENERALIZATION_TYPE);
 	}
 }
@@ -182,7 +166,7 @@ yyerror(char *fileName,char *errorMeg,int lineno)
 	
 	
 	if(strcmp(fileName,"syntax error")!=0){
-		fprintf(fp,"line:%d:	error: %s\n",lineno,errorMeg);		
+		fprintf(fp,"~line:%d:	error: %s\n",lineno,errorMeg);		
 	}
 
 	fclose(fp);

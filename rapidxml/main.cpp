@@ -10,16 +10,18 @@ using namespace std;
 
 int main()
 {    
-      file<> fdoc("testing2(association_class_enrollment).xml");
+      file<> fdoc("../product/information.xml");
       std::cout<<fdoc.data()<<std::endl; 
       xml_document<>   doc;    
       doc.parse<0>(fdoc.data()); 
 
       std::cout<<doc.name()<<"....................."<<std::endl;
+      ofstream ofs;
+      ofs.open("../product/errorMessage.txt",  ios::app);
   
      //! 获取根节点
       xml_node<> *root = doc.first_node();
-      std::cout<<"First root:"<<root->name()<<std::endl;
+      //std::cout<<"First root:"<<root->name()<<std::endl;
       string IDerror[100];
       string classname[100];
       string genClass[100];
@@ -36,12 +38,13 @@ int main()
       //int c1 =0,c2=0;
       
       //int quaClasscount = 0;
+      int classamount = 0;
       
 
       for(xml_node<> *pNode1=root->first_node(); pNode1; pNode1=pNode1->next_sibling()) 
       {  
          
-                std:cout<<"second root:"<<pNode1->name()<<std::endl;
+               // std:cout<<"second root:"<<pNode1->name()<<std::endl;
         
      //! 获取根节点第一个节点
       
@@ -55,8 +58,8 @@ int main()
                 for(xml_node<> *pNode2=pNode1->first_node(); pNode2; pNode2=pNode2->next_sibling())
                 {
         
-                        std::cout<<"attributes name:"<<pNode2->name()<<std::endl; 
-                        std::cout<<"attributes value:"<<pNode2->value()<<std::endl; 
+                       // std::cout<<"attributes name:"<<pNode2->name()<<std::endl; 
+                      //  std::cout<<"attributes value:"<<pNode2->value()<<std::endl; 
                         if(strcmp(pNode2->name(),"class_name")==0)
                         {
                                 classname[i] = pNode2->value();
@@ -86,6 +89,7 @@ int main()
                                         
                                            j++;
                                            genClasscount = j;
+                                           classamount = j;
                                            }
                                        }
                           //------------------------------------------------------------------------------------------------------------------------------
@@ -103,8 +107,8 @@ int main()
   
                                 if(strcmp(pNode3->name(),"")!=0)
                                 {
-                                        std::cout<<"First layer node name:"<<pNode3->name()<<std::endl;
-                                        std::cout<<"First layer node value:"<<pNode3->value()<<std::endl;
+                                       // std::cout<<"First layer node name:"<<pNode3->name()<<std::endl;
+                                       // std::cout<<"First layer node value:"<<pNode3->value()<<std::endl;
       
                                         if(strcmp(pNode3->name(),"identifier")==0 && pNode3->value()[0]=='I')
                                                 IDcount++;
@@ -123,7 +127,15 @@ int main()
                                                 qualification = true;  
                                                 if(strcmp(pNode3->value(),qualivalue))
                                                 {
-                                                        cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+
+         /*
+          * Error messages to show on web page
+          * To show error in top-left, put " " at beginning (e.g. " ~message")
+          * To show error next to a class, put class name at beginning (e.g. "myclass~message")
+          */
+                                                ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
+                                                                                 
+                                                cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
                                                 }
                                         }
                        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -148,14 +160,20 @@ int main()
                                         
                         //---------------------------------------------------------------------------------------------------------------------------------
                                         if (qualification && strcmp(pNode3->name(),"multiplicity")==0 && strcmp(pNode3->value(),"[1..*]")==0 )
+                                        {
+                                                ofs <<"~Error: Wrong multiplicity on the other side of qualification"<<endl;        
                                                 cout<<"..............Error: Wrong multiplicity on the other side of qualification..................."<<endl;
+                                        }
                        //------------------------------------------------------------------------------------------------------------------------------
                                         if(strcmp(pNode1->name(),"association")==0 && strcmp(pNode2->name(),"other_class")==0 && strcmp(pNode3->name(),"class_name")==0 && strcmp(pNode3->value(),"") != 0 && qualification )
-                                        {
+                                        {   
                                             quaClass[q] = pNode3->value();
-                                            //cout<<quaClass[q]<<"iiiiiiiiiiiiiiiiiiiiiiii"<<endl;
+                                            
+                                           // cout<<quaClass[q]<<"iiiiiiiiiiiiiiiiiiiiiiii"<<endl;
                                             q++;
+                                           
                                             genClasscount = genClasscount + q -1;
+                                            classamount = classamount + q;
                                         }
                                             
                                    
@@ -166,15 +184,16 @@ int main()
                                 {
                                         if(strcmp(pNode4->name(),"")!=0)
                                         { 
-                                                std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
-                                                std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
+                                                //std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
+                                               // std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
                                                 
                                         }
                                         if(strcmp(pNode2->name(),"Link") == 0 && strcmp(pNode3->name(),"association_class") == 0 && strcmp(pNode4->name(),"nameOfAssociationClass") == 0 && strcmp(pNode4->value(),"") != 0)
                                         {
                                             linkClass[l] = pNode4->value();
                                             l++;
-                                             genClasscount++;
+                                            classamount ++;
+                                            // genClasscount++;
                                         }
                                 } // loop 4
 
@@ -196,12 +215,14 @@ int main()
      
       for(int j=0;j<i;j++)
       {
-         string str1 = "........................Error: The class: ";
+         string str1 = "~Error: The class: ";
          string str2 = " has no identifer.....................";
          string str;
          bool tmp = false;
-         for(int k =0 ;k < genClasscount; k++)
+       // cout<<"classammount "<<classamount<<endl;
+         for(int k =0 ;k < classamount; k++)
          {    
+            //  cout<< quaClass[k]<<endl;
                 if(IDerror[j] == genClass[k] ||  IDerror[j] == quaClass[k] || IDerror[j] == linkClass[k])
                 {
                     tmp = true;
@@ -213,11 +234,14 @@ int main()
          if(tmp == false)
          {
          str = str1 + IDerror[j] + str2;
-           
+          ofs<<str<<endl;
           cout<<str<<endl;
          }
           
       }
+      
+     // cout << genClasscount <<
+      
       //---------------------------------------------------------------------------------------------------------------------------
       if(genClasscount>0){
       int sameClass[genClasscount];
@@ -234,17 +258,21 @@ int main()
                         }
                  }
       }
-      cout<<"..........................................................................................."<<endl;
+    //  cout<<"...........................................s................................................"<<endl;
       string value="tmp";
+    
       for (int m =0; m < attCount ; m++)
       {
                 for(int n =0 ;n < attCount; n++)
                 {
+                     
                         
-                    if(att[sameClass[0]][m]==att[sameClass[1]][n] && att[sameClass[0]][m]!="")
-                    {
+                       // cout << att[sameClass[0]][m] << endl;
+                        
+                    if(att[sameClass[0]][m] == att[sameClass[1]][n] && att[sameClass[0]][m] != "")
+                    {                       
                         value = att[sameClass[0]][m];
-                        //cout <<"error "<< value <<" can be in the parent class......"<<endl;
+                       // cout <<"error "<< value <<" can be in the parent class......"<<endl;
                         break;
                     }
                         
@@ -262,19 +290,18 @@ int main()
                
               if(value==att[y][y1])
                   break;
-              else
-              {
-                
-                  //return 1;
-              }
+            
           }
       }
           if(y==genClasscount&& value!="tmp")
+          {
+              ofs  <<"~Error: "<< value <<" can be in the parent class"<<endl;
               cout <<"........................Error: "<< value <<" can be in the parent class......................................"<<endl;
+          }
       //---------------------------------------------------------------------------------------------------------------------------  
       }
-    //   for(int mm = 0; mm <genAssCount; mm ++)
-    //   cout<<"@@@@@@"<<genAss[mm][0]<<"@@@@@@"<<genAss[mm][1]<<"@@@@@@"<<genAss[mm][2]<<endl;
+      // for(int mm = 0; mm <genAssCount; mm ++)
+      // cout<<"@@@@@@"<<genAss[mm][0]<<"@@@@@@"<<genAss[mm][1]<<"@@@@@@"<<genAss[mm][2]<<endl;
         
       
       int CountSameRow[genAssCount][genAssCount];
@@ -310,6 +337,7 @@ int main()
                          
                           if(flag == false)
                           {
+                              ofs<<"~Warning:"<<genAss[i][2];   
                               cout<<"........................Warning:"<<genAss[i][2];
                               flag = true;
                           }  
@@ -321,13 +349,16 @@ int main()
                       }
                   }
                   if(exist)
+                  {
+                   ofs<<" can be GENED by "<<genAss[i][1]<<endl;
                    cout<<" can be GENED by "<<genAss[i][1]<<"....................................."<<endl;
+                   }
           }
                  
           
       }
      
-   
+   ofs.close();
       
     // system("PAUSE");
      return EXIT_SUCCESS;

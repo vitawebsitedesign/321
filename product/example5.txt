@@ -1,10 +1,14 @@
-Person{ ssno		ID,
-		name,
-		address };
+Student 
+{ student#	ID,
+  name,
+  dob };
 
+Undergradute_student
+{ 
+};
 
-Company{ name		ID,
-		 address };
+Postgraduate_student
+{scholarship 
+};
 
-Person [*]Employed_by{salary, title}[*] Company;
-Person [0..1]Supervises{when_assigned}[*] Person;
+Undergradute_student, Postgraduate_student ISA(t-e) Student;

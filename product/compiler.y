@@ -50,9 +50,9 @@
 	
 	char *returnClassName();
 	void writeAssociationName(FILE *fp);
-	void writeLeftMultiplicity(FILE *fp);
-	void writeLeftRole(FILE *fp);
-	void writeLeftQualification(FILE *fp);
+	void writeLeftMultiplicity(FILE *fp,char *className);
+	void writeLeftRole(FILE *fp,char *className);
+	void writeLeftQualification(FILE *fp,char *className);
 	void writeRightMultiplicity(FILE *fp,char *className);
 	void writeRightRole(FILE *fp,char *className);
 	void writeRightQualification(FILE *fp,char *className);	
@@ -414,7 +414,7 @@ int add_node(char *cla_name,char *attr_name,char *attr_multi,char *attr_id)
 			tmp->next = newNode;
 		}
 		else {
-			char errorMessage[200] = "attribute ";
+			char errorMessage[200] = "~attribute ";
 			strcat(errorMessage,attr_name);
 			strcat(errorMessage," in class ");
 			strcat(errorMessage,cla_name);
@@ -426,7 +426,6 @@ int add_node(char *cla_name,char *attr_name,char *attr_multi,char *attr_id)
 
 void write_classDefinition(char *className)
 {
-	char a;
 	struct node *search = nodeList;
 	FILE *fp;
 	fp = fopen("information.xml","a");
@@ -437,30 +436,11 @@ void write_classDefinition(char *className)
 	
 	for(;search;search=search->next){
 		if(strcmp(className,search->class_name)==0){
-			
-if(search->attribute_name[0]== '/')
-{
-     
-                 char temp[100];
-                  strcpy(temp,search->attribute_name);
-             temp[0] = '\n';
-            
-                  fprintf(fp,"\t\t<attribute>\n");
-	                fprintf(fp,"\t\t\t<derived>\n");
-			 fprintf(fp,"\t\t\t<attribute_name>%s</attribute_name>\n",temp);
-			 fprintf(fp,"\t\t\t<identifier>%s</identifier>\n",search->attribute_id);	
-			 fprintf(fp,"\t\t\t<multiplicity>%s</multiplicity>\n",search->attribute_multiplicity);
-                        fprintf(fp,"\t\t\t</derived>\n");
-		fprintf(fp,"\t\t</attribute>\n");
-}
-else{
-                 fprintf(fp,"\t\t<attribute>\n");
-                        fprintf(fp,"\t\t\t<attribute_name>%s</attribute_name>\n",search->attribute_name);
-			fprintf(fp,"\t\t\t<identifier>%s</identifier>\n",search->attribute_id);
+			fprintf(fp,"\t\t<attribute>\n");
+			fprintf(fp,"\t\t\t<attribute_name>%s</attribute_name>\n",search->attribute_name);
+			fprintf(fp,"\t\t\t<identifier>%s</identifier>\n",search->attribute_id);	
 			fprintf(fp,"\t\t\t<multiplicity>%s</multiplicity>\n",search->attribute_multiplicity);
-	         fprintf(fp,"\t\t\t</attribute>\n");
-}
-
+			fprintf(fp,"\t\t</attribute>\n");
 		}
 	}
 	
@@ -548,7 +528,7 @@ void addAssoNode(char *classN,char *attributeN,char *attributeV)
 	
 	if(strcmp(attributeN,"ASSOCIATION_CLASS_NAME")==0){
 		if(nameExist(attributeV)==0){
-			char errorMessage[200] = "association class name in association ";
+			char errorMessage[200] = "~association class name in association ";
 			strcat(errorMessage,classN);
 			strcat(errorMessage," has not previously been defined");
 			yyerror(fileName,errorMessage,yylineno);
@@ -566,7 +546,7 @@ void addAssoNode(char *classN,char *attributeN,char *attributeV)
 			tmp->next = newNode;
 		}
 		else {
-			char errorMessage[200] = "attribute ";
+			char errorMessage[200] = "~attribute ";
 			strcat(errorMessage,attributeV);
 			strcat(errorMessage," in class ");
 			strcat(errorMessage,classN);
@@ -630,9 +610,9 @@ void write_associationDefinition()
 	fprintf(fp,"\t\t<class>\n");
 	fprintf(fp,"\t\t\t<class_name>%s</class_name>\n",className);
 	
-	writeLeftMultiplicity(fp);
-	writeLeftRole(fp);
-	writeLeftQualification(fp);
+	writeLeftMultiplicity(fp, associationName);
+	writeLeftRole(fp, associationName);
+	writeLeftQualification(fp, associationName);
 	
 	fprintf(fp,"\t\t</class>\n");
 	
@@ -698,36 +678,16 @@ void writeAssociationName(FILE *fp)
 		}
 		tmp=tmp->next;
 	}
-       
 }
 
-void writeLeftQualification(FILE *fp)
-{
 
-	struct AssociationClassNode *tmp;
-	tmp = assNodeList;
-	int qualificationExist = 0;
-	while(tmp!=NULL){
-		if(strcmp(tmp->attribute_name,"QUALIFICATION")==0 && tmp->displayInFile==0){
-			fprintf(fp,"\t\t\t<qualification>%s</qualification>\n",tmp->attribute_value);
-			tmp->displayInFile = 1;
-			qualificationExist  = 1;
-		}
-		tmp=tmp->next;
-	}
-        if(qualificationExist==0){
-		fprintf(fp,"\t\t\t<qualification></qualification>\n");
-	}
-}
-
-void writeLeftMultiplicity(FILE *fp)
+void writeLeftMultiplicity(FILE *fp,char *className)
 {
 	/*write the multiplicity of the left class*/
 	fprintf(fp,"\t\t\t<multiplicity>");
 	struct AssociationClassNode *tmp;
 	tmp = assNodeList;	/*reset the pointer to the beginning of the linked list*/
-	while(tmp!=NULL){
-
+	while(strcmp(tmp->class_name,className)!=0){
 		if(strcmp(tmp->attribute_name,"MULTIPLICITY")==0 && tmp->displayInFile==0){
 			fprintf(fp,"%s",tmp->attribute_value);
 			tmp->displayInFile = 1;
@@ -739,15 +699,14 @@ void writeLeftMultiplicity(FILE *fp)
 	
 }
 
-
-void writeLeftRole(FILE *fp)
+void writeLeftRole(FILE *fp,char *className)
 {
 	
 	/*write the role of the left class*/
 	fprintf(fp,"\t\t\t<role>");
 	struct AssociationClassNode *tmp;
 	tmp = assNodeList;	/*reset the pointer to the beginning of the linked list*/
-	while(tmp!=NULL){
+	while(strcmp(tmp->class_name,className)!=0){
 		if(strcmp(tmp->attribute_name,"ROLE")==0 && tmp->displayInFile==0){
 			fprintf(fp,"%s",tmp->attribute_value);
 			tmp->displayInFile = 1;
@@ -758,6 +717,24 @@ void writeLeftRole(FILE *fp)
 	fprintf(fp,"</role>\n");
 }
 
+void writeLeftQualification(FILE *fp,char *className)
+{
+	/*write the qualification of the left class*/
+	struct AssociationClassNode *tmp;
+	tmp = assNodeList;	/*reset the pointer to the beginning of the linked list*/	
+	int qualificationExist = 0;	/*check whether the qualification of link has been found in writing document purpose*/
+	while(strcmp(tmp->class_name,className)!=0){
+		if(strcmp(tmp->attribute_name,"QUALIFICATION")==0 && tmp->displayInFile==0){
+			fprintf(fp,"\t\t\t<qualification>%s</qualification>\n",tmp->attribute_value);
+			tmp->displayInFile = 1;
+			qualificationExist  = 1;
+		}
+		tmp = tmp->next;
+	}
+	if(qualificationExist==0){
+		fprintf(fp,"\t\t\t<qualification></qualification>\n");
+	}
+}
 
 void writeRightMultiplicity(FILE *fp,char *className)
 {

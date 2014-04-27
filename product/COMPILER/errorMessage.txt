@@ -1,10 +1,2 @@
-line:3:	error: multiplicity is compulsory of the right class
-line:5:	error: class has not been defined before the association definition.
-line:6:	error: expected ';' at the end of the class definition.
-line:8:	error: class has not been defined before the association definition.
-line:8:	error: multiplicity is compulsory of the left class
-line:10:	error: class has not been defined before the association definition.
-line:11:	error: expected ';' at the end of the class definition.
-line:12:	error: class has not been defined before the association definition.
-line:12:	error: multiplicity is compulsory of the left class
-line:14:	error: class has not been defined before the association definition.
+line:1:	error: expected comma before identifier
+line:1:	error: expected comma between member definition
