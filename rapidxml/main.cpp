@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {    
-      file<> fdoc("../product/information.xml");
+      file<> fdoc("testing2(association_class_enrollment).xml");
       std::cout<<fdoc.data()<<std::endl; 
       xml_document<>   doc;    
       doc.parse<0>(fdoc.data()); 
@@ -26,6 +26,7 @@ int main()
       string quaClass[100];
       string att[100][100]; // 记录每个class里面的attribute
       string genAss[100][3];
+      string linkClass[100];
       int genAssCount = 0;
       int classCount = 0;
       int attCount = 0;
@@ -50,6 +51,7 @@ int main()
                 char* qualivalue;;
                 int j = 0;
                 int q = 0;
+                int l = 0;
                 for(xml_node<> *pNode2=pNode1->first_node(); pNode2; pNode2=pNode2->next_sibling())
                 {
         
@@ -70,7 +72,7 @@ int main()
                         if(strcmp(pNode1->name(),"class") ==0 && strcmp(pNode2->name(),"class_name")==0 )
                         {
                             att[classCount][0] = pNode2->value();
-                            // cout<<"///////////////////////"<<att[classCount][0]<<"///////////////////////"<<endl;
+                           
                         }
     
                      
@@ -81,9 +83,7 @@ int main()
                                            if(strcmp(pNode2->name(),"class_name")==0)
                                            {
                                            genClass[j] = pNode2->value();
-                                          // cout<<genClass[j]<<"..................................."<<endl;
-                                          
-                                          // cout<<"///////////////////////"<<att[classCount]<<"///////////////////////"<<endl;
+                                        
                                            j++;
                                            genClasscount = j;
                                            }
@@ -93,7 +93,7 @@ int main()
                                         {
                                       
                                              genAss[genAssCount][0] = pNode2->value();
-                                            // cout<<"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"<<genAss[genAssCount][0]<<endl;
+                                          
                                             
                                         }
                         
@@ -114,7 +114,7 @@ int main()
                                         {
                                                 qualivalue = pNode3->value();
                                                 att[classCount][attCount] = pNode3->value();
-                                               // cout<<"::::::::::::::"<<attCount<<"::::::::::::::::::::::;"<<att[classCount][attCount]<<";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"<<endl;
+                                               
                                                 attCount++;
                                         }
                                         if(strcmp(pNode1->name(),"association")==0 && strcmp(pNode2->name(),"class")==0 && strcmp(pNode3->name(),"qualification")==0 && strcmp(pNode3->value(),"") != 0)
@@ -133,7 +133,7 @@ int main()
                                         {
                                       
                                              genAss[genAssCount][1] = pNode3->value();
-                                           //  cout<<"oooooooo"<<genAss[genAssCount][1]<<"oooooooo"<<endl;
+                                       
                                             
                                         }
                                         
@@ -141,7 +141,7 @@ int main()
                                         {
                                       
                                              genAss[genAssCount][2] = pNode3->value();
-                                            // cout<<"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa"<<genAss[genAssCount][2]<<endl;
+                                          
                                                genAssCount++;
                                             
                                         }
@@ -168,7 +168,13 @@ int main()
                                         { 
                                                 std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
                                                 std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
-          
+                                                
+                                        }
+                                        if(strcmp(pNode2->name(),"Link") == 0 && strcmp(pNode3->name(),"association_class") == 0 && strcmp(pNode4->name(),"nameOfAssociationClass") == 0 && strcmp(pNode4->value(),"") != 0)
+                                        {
+                                            linkClass[l] = pNode4->value();
+                                            l++;
+                                             genClasscount++;
                                         }
                                 } // loop 4
 
@@ -187,30 +193,26 @@ int main()
                 classCount++;
               
       } // loop 1
-      bool tmp = false;
+     
       for(int j=0;j<i;j++)
       {
-             
          string str1 = "........................Error: The class: ";
          string str2 = " has no identifer.....................";
          string str;
-        
+         bool tmp = false;
          for(int k =0 ;k < genClasscount; k++)
          {    
-                if(IDerror[j] == genClass[k] ||  IDerror[j] == quaClass[k])
+                if(IDerror[j] == genClass[k] ||  IDerror[j] == quaClass[k] || IDerror[j] == linkClass[k])
                 {
                     tmp = true;
+                     break;
                 }
-                break;
+               
                 
          } 
          if(tmp == false)
          {
          str = str1 + IDerror[j] + str2;
-          ofstream ofs;
-              ofs.open("../product/errorMessage.txt");
-              ofs << " ~Some error message yo" << endl;    
-              ofs.close();
            
           cout<<str<<endl;
          }
@@ -254,23 +256,25 @@ int main()
        int y=2;
       for( y;y<genClasscount ;y++)
       {
-          
+           //cout<<"sdhjsakdhjsahdj";
           for(int y1=1;y1<attCount;y1++)
           {
                
               if(value==att[y][y1])
                   break;
               else
-                  return 1;
-            
+              {
+                
+                  //return 1;
+              }
           }
       }
           if(y==genClasscount&& value!="tmp")
               cout <<"........................Error: "<< value <<" can be in the parent class......................................"<<endl;
-          
+      //---------------------------------------------------------------------------------------------------------------------------  
       }
-       for(int mm = 0; mm <genAssCount; mm ++)
-       cout<<"@@@@@@"<<genAss[mm][0]<<"@@@@@@"<<genAss[mm][1]<<"@@@@@@"<<genAss[mm][2]<<endl;
+    //   for(int mm = 0; mm <genAssCount; mm ++)
+    //   cout<<"@@@@@@"<<genAss[mm][0]<<"@@@@@@"<<genAss[mm][1]<<"@@@@@@"<<genAss[mm][2]<<endl;
         
       
       int CountSameRow[genAssCount][genAssCount];
@@ -308,7 +312,7 @@ int main()
                           {
                               cout<<"........................Warning:"<<genAss[i][2];
                               flag = true;
-                          }
+                          }  
                           exist = true;
                           cout<<" and "<<genAss[CountSameRow[i][m]][2];
                           m++;
@@ -323,7 +327,7 @@ int main()
           
       }
      
-    //  cout<<CountSameRow[0][0]<<"ss"<<CountSameRow[0][1]<<endl;
+   
       
     // system("PAUSE");
      return EXIT_SUCCESS;
