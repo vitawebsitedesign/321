@@ -39,6 +39,7 @@ int main()
       
       //int quaClasscount = 0;
       int classamount = 0;
+      int l = 0;
       
 
       for(xml_node<> *pNode1=root->first_node(); pNode1; pNode1=pNode1->next_sibling()) 
@@ -54,7 +55,7 @@ int main()
                 char* qualivalue;;
                 int j = 0;
                 int q = 0;
-                int l = 0;
+                
                 for(xml_node<> *pNode2=pNode1->first_node(); pNode2; pNode2=pNode2->next_sibling())
                 {
         
@@ -172,7 +173,7 @@ int main()
                                            // cout<<quaClass[q]<<"iiiiiiiiiiiiiiiiiiiiiiii"<<endl;
                                             q++;
                                            
-                                            genClasscount = genClasscount + q -1;
+                                           // genClasscount = genClasscount + q -1;
                                             classamount = classamount + q;
                                         }
                                             
@@ -184,8 +185,8 @@ int main()
                                 {
                                         if(strcmp(pNode4->name(),"")!=0)
                                         { 
-                                                //std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
-                                               // std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
+                                                std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
+                                                std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
                                                 
                                         }
                                         if(strcmp(pNode2->name(),"Link") == 0 && strcmp(pNode3->name(),"association_class") == 0 && strcmp(pNode4->name(),"nameOfAssociationClass") == 0 && strcmp(pNode4->value(),"") != 0)
@@ -222,7 +223,7 @@ int main()
        // cout<<"classammount "<<classamount<<endl;
          for(int k =0 ;k < classamount; k++)
          {    
-            //  cout<< quaClass[k]<<endl;
+              cout<< linkClass[k]<<endl;
                 if(IDerror[j] == genClass[k] ||  IDerror[j] == quaClass[k] || IDerror[j] == linkClass[k])
                 {
                     tmp = true;
@@ -338,10 +339,11 @@ int main()
                           if(flag == false)
                           {
                               ofs<<"~Warning:"<<genAss[i][2];   
-                              cout<<"........................Warning:"<<genAss[i][2];
+                              cout<<"Warning:"<<genAss[i][2];
                               flag = true;
                           }  
                           exist = true;
+                          ofs<<" and "<<genAss[CountSameRow[i][m]][2];
                           cout<<" and "<<genAss[CountSameRow[i][m]][2];
                           m++;
                           SameRow[count] = j;
@@ -350,8 +352,8 @@ int main()
                   }
                   if(exist)
                   {
-                   ofs<<" can be GENED by "<<genAss[i][1]<<endl;
-                   cout<<" can be GENED by "<<genAss[i][1]<<"....................................."<<endl;
+                   ofs<<" can be generated to one class "<<endl;
+                   cout<<" can be generated to one class"<<endl;
                    }
           }
                  

@@ -11,6 +11,6 @@ Subject
 };
 
 Enrolment
-{ enrolment-date };
+{  };
 
 Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 
