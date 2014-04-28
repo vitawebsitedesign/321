@@ -1,14 +1,25 @@
-Student 
-{ student#	ID,
-  name,
-  dob };
-
-Undergradute_student
-{ 
+Building
+{ building_number	ID,
+  name 
 };
 
-Postgraduate_student
-{scholarship 
+Room
+{ room_number
 };
 
-Undergradute_student, Postgraduate_student ISA(t-e) Student;
+Office
+{ area
+};
+
+Hall
+{ area
+};
+
+Toilet
+{ area
+};
+
+
+Building(room_number)[1]Contains[0..1] Room;
+
+Office, Hall, Toilet ISA(t-e) Room;

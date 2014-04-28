@@ -1,7 +1,14 @@
-Male{ };
+Student 
+{ student#	ID,
+  name,
+  dob };
 
-Female{ };
+Undergradute_student
+{ 
+};
 
-Person{ };
+Postgraduate_student
+{scholarship 
+};
 
-Male, Female ISA(t-e) Person;
+Undergradute_student, Postgraduate_student ISA(t-e) Student;

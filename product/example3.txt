@@ -1,11 +1,16 @@
-Person{ ssno		ID1,
-	name,
-	date_of_birth,
-	address };
+Student 
+{ s#	ID,
+  fname,
+  lname,
+  dob };
 
-Car{ rego,
-     producer,
-     model,
-     made };
+Subject
+{ code		ID,
+  title,
+  credits 
+};
 
-Person AS owner[1] Owns [1]Car;
+Enrolment
+{ enrolment-date };
+
+Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 

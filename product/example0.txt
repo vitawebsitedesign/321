@@ -1,0 +1,10 @@
+Building
+{ building_number	ID,
+  name 
+};
+
+Room
+{ room_number,
+  area,
+  type 
+};

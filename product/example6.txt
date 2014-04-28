@@ -18,8 +18,8 @@ Hall
 Toilet
 { area
 };
-
-
 Building(room_number)[1]Contains[0..1] Room;
 
-Office, Hall, Toilet ISA(t-e) Room;
+Room[1] Isa[1] Toilet;
+Room[1] Isa[1] Office;
+Room[1] Isa[1] Hall;
