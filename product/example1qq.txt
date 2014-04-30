@@ -5,6 +5,7 @@ Building
 
 Room
 {
+  room_number,
   area,
   type 
 };

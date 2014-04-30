@@ -4,13 +4,14 @@
 #include "rapidxml_print.hpp"
 //#include "rapidxml_iterators.hpp"
 #include <string.h>
+#include <string>
 
 using namespace rapidxml;
 using namespace std;
 
 int main()
 {    
-      file<> fdoc("../product/information.xml");
+      file<> fdoc("information.xml");
       std::cout<<fdoc.data()<<std::endl; 
       xml_document<>   doc;    
       doc.parse<0>(fdoc.data()); 
@@ -19,7 +20,7 @@ int main()
       ofstream ofs;
       ofs.open("../product/errorMessage.txt",  ios::app);
   
-     //! 获取根节点
+     //! 获取根节�?
       xml_node<> *root = doc.first_node();
       //std::cout<<"First root:"<<root->name()<<std::endl;
       string IDerror[100];
@@ -40,6 +41,8 @@ int main()
       //int quaClasscount = 0;
       int classamount = 0;
       int l = 0;
+       int q = 0;
+        string attributes[100];
       
 
       for(xml_node<> *pNode1=root->first_node(); pNode1; pNode1=pNode1->next_sibling()) 
@@ -47,14 +50,14 @@ int main()
          
                // std:cout<<"second root:"<<pNode1->name()<<std::endl;
         
-     //! 获取根节点第一个节点
+     //! 获取根节点第�?��节点
       
                 int IDcount = 0;
                 int IDattCount = 0;
                 bool qualification = false;
-                char* qualivalue;;
+               
                 int j = 0;
-                int q = 0;
+               
                 
                 for(xml_node<> *pNode2=pNode1->first_node(); pNode2; pNode2=pNode2->next_sibling())
                 {
@@ -117,7 +120,16 @@ int main()
                                                 IDcount++;
                                         if(strcmp(pNode1->name(),"class")==0 && strcmp(pNode2->name(),"attribute")==0 && strcmp(pNode3->name(),"attribute_name")==0 )
                                         {
-                                                qualivalue = pNode3->value();
+                                            for(int i =0;  i<100; i++)
+                                            {
+                                                if(attributes[i] == "")
+                                                {
+                                                    //cout<<"good"<<endl;
+                                                attributes[i] = pNode3->value();
+                                              
+                                                break;
+                                                }
+                                            }
                                                 att[classCount][attCount] = pNode3->value();
                                                
                                                 attCount++;
@@ -125,18 +137,20 @@ int main()
                                         if(strcmp(pNode1->name(),"association")==0 && strcmp(pNode2->name(),"class")==0 && strcmp(pNode3->name(),"qualification")==0 && strcmp(pNode3->value(),"") != 0)
                                         {
                                       
-                                                qualification = true;  
-                                                if(strcmp(pNode3->value(),qualivalue))
+                                                qualification = true;           
+                                                for(int i =0; i < attCount; i++)
                                                 {
+                                            
+                                                        if(pNode3->value() == attributes[i])
+                                                         {
 
-         /*
-          * Error messages to show on web page
-          * To show error in top-left, put " " at beginning (e.g. " ~message")
-          * To show error next to a class, put class name at beginning (e.g. "myclass~message")
-          */
-                                                ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
+                                                    
+                                                          ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
                                                                                  
-                                                cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+                                                          cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+                                                          
+                                                          break;
+                                                          }
                                                 }
                                         }
                        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -185,8 +199,8 @@ int main()
                                 {
                                         if(strcmp(pNode4->name(),"")!=0)
                                         { 
-                                                std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
-                                                std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
+                                                //std::cout<<"Second layer node name:"<<pNode4->name()<<std::endl;
+                                               // std::cout<<"Second layer node value:"<<pNode4->value()<<std::endl;
                                                 
                                         }
                                         if(strcmp(pNode2->name(),"Link") == 0 && strcmp(pNode3->name(),"association_class") == 0 && strcmp(pNode4->name(),"nameOfAssociationClass") == 0 && strcmp(pNode4->value(),"") != 0)
@@ -196,6 +210,25 @@ int main()
                                             classamount ++;
                                             // genClasscount++;
                                         }
+                                        if(strcmp(pNode2->name(),"Link") == 0 && strcmp(pNode3->name(),"association_class") == 0 && strcmp(pNode4->name(),"qualification") == 0 && strcmp(pNode4->value(),"") != 0)
+                                        {
+                                                 qualification = true;           
+                                                for(int i =0; i < attCount; i++)
+                                                {
+                                               
+                                                        if(pNode4->value() == attributes[i])
+                                                         {
+
+                                                    
+                                                          ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
+                                                                                 
+                                                          cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+                                                          
+                                                          break;
+                                                          }
+                                                }
+                                        }
+                                        
                                 } // loop 4
 
                         } // loop3
@@ -223,7 +256,7 @@ int main()
        // cout<<"classammount "<<classamount<<endl;
          for(int k =0 ;k < classamount; k++)
          {    
-              cout<< linkClass[k]<<endl;
+              //cout<< linkClass[k]<<endl;
                 if(IDerror[j] == genClass[k] ||  IDerror[j] == quaClass[k] || IDerror[j] == linkClass[k])
                 {
                     tmp = true;

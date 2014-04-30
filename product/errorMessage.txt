@@ -1,5 +1,0 @@
-~Error: Attributes used in qualification must be removed from a class on the other side of qualification
-~Error: Wrong multiplicity on the other side of qualification
-~Error: Attributes used in qualification must be removed from a class on the other side of qualification
-~Error: Wrong multiplicity on the other side of qualification
-~Error: The class: Building has no identifer.....................

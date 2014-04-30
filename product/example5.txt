@@ -3,10 +3,6 @@ Building
   name 
 };
 
-Room
-{ room_number
-};
-
 Office
 { area
 };
@@ -19,7 +15,6 @@ Toilet
 { area
 };
 
-
-Building(room_number)[1]Contains[0..1] Room;
-
-Office, Hall, Toilet ISA(t-e) Room;
+Building(room_number)[1] Consists-of[0..1] Office;
+Building(room_number)[1] Consists-of[0..1] Hall;
+Building(room_number)[1] Consists-of[0..1] Toilet;

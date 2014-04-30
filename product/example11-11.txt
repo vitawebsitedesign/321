@@ -1,0 +1,16 @@
+Student {	
+	s#	ID,
+	fname,
+	lname,
+	dob 		
+};
+
+Subject{
+ 		code		ID,
+		title,
+		credits 
+};
+
+Enrolment{	enrolment_date };
+
+Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 

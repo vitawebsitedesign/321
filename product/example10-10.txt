@@ -1,0 +1,10 @@
+Campus {cname ID};
+
+Building{bldg_num ID};
+
+Room{room_num	ID,
+     area			};
+
+Building [0..1]Belongs_to [1..*] (bldg_num) Campus;
+
+Room [0..1]Is_in [0..2](room_num)Building;

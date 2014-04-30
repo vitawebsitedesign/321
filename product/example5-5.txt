@@ -1,0 +1,10 @@
+Person{ 		ssno		ID,
+		name,
+		address };
+
+
+Company{		name		ID,
+		address };
+
+Person [*]Employed_by{salary, title}[*] Company;
+Person [0..1]Supervises{when_assigned}[*] Person;
