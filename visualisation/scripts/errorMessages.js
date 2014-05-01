@@ -1,0 +1,1 @@
+var errMsgs=[{"class":"","msg":"Error: Attributes used in qualification must be removed from a class on the other side of qualification"},{"class":"","msg":"Error: Wrong multiplicity on the other side of qualification"},{"class":"","msg":"Error: Attributes used in qualification must be removed from a class on the other side of qualification"}];

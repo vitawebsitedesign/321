@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Advanced Database Design System - schema visualization</title>
+		<link href="styles/reset.css" rel="stylesheet">
+		<link href="styles/jsPlumb.css" rel="stylesheet">
+		<link href="styles/schema.css" rel="stylesheet">
+		<link href="styles/colorPicker.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="schema"></div>
+		<div id="appearanceControls">
+			Set
+			<select id="selector">
+				<option value="body">schema</option>
+				<option value=".qualification">qualification</option>
+				<option value=".class">class</option>
+				<option value=".attribute">attribute</option>
+				<option value=".id">id flag</option>
+				<option value="association lines">association lines</option>
+				<option value=".label">association names</option>
+				<option value=".multiplicity">multiplicity</option>
+			</select>
+			<select id="property">
+				<option value="background">background</option>
+				<option value="font-family">text type</option>
+				<option value="color">text color</option>
+				<option value="font-size">text size</option>
+				<option value="border-radius">rounded corners</option>
+			</select>
+			<input id="spinner" type="number" min="1" max="30" value="15"/>
+			<button id="color-button"></button>
+			<select id="text-type">
+				<option value="serif">Serif</option>
+				<option value="sans-serif">Sans-serif</option>
+			</select>
+			<button id="print-button">print</button>
+			<button id="save-button">save</button>
+			<button id="errors-button">errors</button>
+		</div>
+		<div id="welcome">
+			<h1>Advanced Database Design System</h1>
+			<p>
+				Initialising the awesome...
+			</p>
+		</div>
+		<div id="error-message-popup">
+			<h2>Your schema design has the following errors:</h2>
+			<hr/>
+			<ul></ul>
+		</div>
+		<div id="error-message-sidepane">
+			<h1>Your schema has the following errors</h1>
+			<ul></ul>
+		</div>
+		<div id="settings-window">
+			<h2>Save settings by replacing text in "scripts\visualisation\xml.js" with the following:</h2>
+			<code></code>
+			<button id="btn-settings-close">X</button>
+		</div>
+
+		<!-- JsPlumb dependencies -->
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jsPlumb/jquery-ui-1.9.2-min.js"></script>
+		<script src="scripts/jsPlumb/jquery.ui.touch-punch.min.js"></script>        
+		<script src="scripts/jsPlumb/jsBezier-0.6.js"></script>     
+		<script src="scripts/jsPlumb/jsplumb-geom-0.1.js"></script>
+		<script src="scripts/jsPlumb/util.js"></script>
+		<script src="scripts/jsPlumb/dom-adapter.js"></script>        
+		<script src="scripts/jsPlumb/jsPlumb.js"></script>
+		<script src="scripts/jsPlumb/endpoint.js"></script>                
+		<script src="scripts/jsPlumb/connection.js"></script>
+		<script src="scripts/jsPlumb/anchors.js"></script>        
+		<script src="scripts/jsPlumb/defaults.js"></script></script>
+		<script src="scripts/jsPlumb/connectors-flowchart.js"></script>
+		<script src="scripts/jsPlumb/connector-editors.js"></script>
+		<script src="scripts/jsPlumb/renderers-svg.js"></script>
+		<script src="scripts/jsPlumb/renderers-canvas.js"></script>
+		<script src="scripts/jsPlumb/renderers-vml.js"></script>
+		<script src="scripts/jsPlumb/jquery.jsPlumb.js"></script>
+		
+		<!-- scripts to visualize schema -->
+		<script src="scripts/xml.js"></script>
+		<script src="scripts/buildSchema.js"></script>
+		<script src="scripts/arrangeSchema.js"></script>
+		<script src="scripts/drawSchema.js"></script>
+		<script src="scripts/drawAssociations.js"></script>
+		<script src="scripts/load.js"></script>
+		<script src="scripts/colorPicker.js"></script>
+		<script src="scripts/changeAppearance.js"></script>
+		<script src="scripts/print.js"></script>
+		<script src="scripts/errorMessages.js"></script>
+		<script src="scripts/showErrors.js"></script>
+		<script src="scripts/save.js"></script>
+	</body>
+</html>

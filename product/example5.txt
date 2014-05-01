@@ -15,6 +15,6 @@ Toilet
 { area
 };
 
-Building(room_number)[1] Consists-of[0..1] Office;
-Building(room_number)[1] Consists-of[0..1] Hall;
-Building(room_number)[1] Consists-of[0..1] Toilet;
+Building[1] Consists-of[0..1] Office;
+Building[1] Consists-of[0..1] Hall;
+Building[1] Consists-of[0..1] Toilet;
