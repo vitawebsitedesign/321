@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {    
       file<> fdoc("information.xml");
-      std::cout<<fdoc.data()<<std::endl; 
+      //std::cout<<fdoc.data()<<std::endl; 
       xml_document<>   doc;    
       doc.parse<0>(fdoc.data()); 
 
@@ -147,7 +147,7 @@ int main()
                                                     
                                                           ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
                                                                                  
-                                                          cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+                                                          cout<<"Error: Attributes used in qualification must be removed from a class on the other side of qualification"<<endl;
                                                           
                                                           break;
                                                           }
@@ -177,7 +177,7 @@ int main()
                                         if (qualification && strcmp(pNode3->name(),"multiplicity")==0 && strcmp(pNode3->value(),"[1..*]")==0 )
                                         {
                                                 ofs <<"~Error: Wrong multiplicity on the other side of qualification"<<endl;        
-                                                cout<<"..............Error: Wrong multiplicity on the other side of qualification..................."<<endl;
+                                                cout<<"Error: Wrong multiplicity on the other side of qualification"<<endl;
                                         }
                        //------------------------------------------------------------------------------------------------------------------------------
                                         if(strcmp(pNode1->name(),"association")==0 && strcmp(pNode2->name(),"other_class")==0 && strcmp(pNode3->name(),"class_name")==0 && strcmp(pNode3->value(),"") != 0 && qualification )
@@ -222,7 +222,7 @@ int main()
                                                     
                                                           ofs << "~Error: Attributes used in qualification must be removed from a class on the other side of qualification" << endl;    
                                                                                  
-                                                          cout<<".............Error: Attributes used in qualification must be removed from a class on the other side of qualification............."<<endl;
+                                                          cout<<"Error: Attributes used in qualification must be removed from a class on the other side of qualification"<<endl;
                                                           
                                                           break;
                                                           }
@@ -250,7 +250,7 @@ int main()
       for(int j=0;j<i;j++)
       {
          string str1 = "~Error: The class: ";
-         string str2 = " has no identifer.....................";
+         string str2 = " has no identifer";
          string str;
          bool tmp = false;
        // cout<<"classammount "<<classamount<<endl;
@@ -330,7 +330,7 @@ int main()
           if(y==genClasscount&& value!="tmp")
           {
               ofs  <<"~Error: "<< value <<" can be in the parent class"<<endl;
-              cout <<"........................Error: "<< value <<" can be in the parent class......................................"<<endl;
+              cout <<"Error: "<< value <<" can be in the parent class"<<endl;
           }
       //---------------------------------------------------------------------------------------------------------------------------  
       }
