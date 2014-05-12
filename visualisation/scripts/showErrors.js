@@ -33,8 +33,8 @@ $(document).ready(function() {
 	var showErrsOnSchema = function() {
 		var classWidth = $($(".class")[0]).css("width");
 		var classPadding = $($(".class")[0]).css("padding");
-		var classWidthTotal = parseInt(classWidth) + (parseInt(classPadding) * 2);		
-		
+		var classWidthTotal = parseInt(classWidth) + (parseInt(classPadding) * 2);
+
 		// For each error in error messages file
 		if (typeof errMsgs === "undefined" || !errMsgs.length) return;
 		errMsgs.forEach(function(err) {

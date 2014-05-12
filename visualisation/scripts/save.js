@@ -123,15 +123,17 @@ $(document).ready(function() {
 		$(xmlDoc).find("settings").remove();
 		$(xmlDoc).find("project").append($(xmlSettings));
 		var xmlWithSettings = (new XMLSerializer()).serializeToString(xmlDoc);	
-		var xmlJs = "var xml = '" + xmlWithSettings + "';var xmlDoc = $.parseXML(xml);";
-		
-		// Present xml to user for copying
-		$("#settings-window").children("code").text(xmlJs).parent().fadeTo("slow", 1);
-	});
-	
-	$("#btn-settings-close").on("click", function() {
-		$("#settings-window").fadeTo("slow", 0, function() {
-			$(this).hide();
+		var xmlSaved = "var xml = '" + xmlWithSettings + "';var xmlDoc = $.parseXML(xml);";
+
+		// Download file containing schema settings
+		$schemaSettings = $("<input/>", {
+			"name": "schemaXML",
+			"value": xmlSaved
 		});
+
+		$("<form/>", {
+			"method": "post",
+			"action": "http://uni-code.org/321/dlSchema/downloadSchema.php"
+		}).append($schemaSettings).submit();
 	});
 });

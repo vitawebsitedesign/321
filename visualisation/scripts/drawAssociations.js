@@ -17,7 +17,7 @@ jsPlumb.ready(function() {
 			}]
 		],
 		Container:"schema"
-	});		
+	});
 
 	// this is the paint style for the connecting lines..
 	var connectorPaintStyle = {
@@ -67,7 +67,7 @@ jsPlumb.ready(function() {
 		paintStyle:{ fillStyle:"#7AB02C",radius:11 },
 		hoverPaintStyle:endpointHoverStyle,
 		maxConnections:-1,
-		dropOptions:{ hoverClass:"hover", activeClass:"active" },
+		dropOptions:{ /*hoverClass:"hover", activeClass:"active"*/ },	// Uncomment if you wish to alter behaviour for the dragging of classes
 		isTarget:true,			
 		overlays:[
 			[ "Label", { location:[0.5, -0.5], cssClass:"endpointTargetLabel" } ]
@@ -313,9 +313,11 @@ function refreshAssocPos() {
 	}, ENDPT_REPOS_TIMEOUT);
 }
 
+var draggingClass = false;
 $(document).ready(function() {
 	// Redraw associations after moving a class
 	$(".class").on("mousedown", function() {
+		draggingClass = true;
 		$(this).attr("prev-box-shadow", $(this).css("box-shadow"));
 	}).on("mouseup", function() {
 		/* 
@@ -325,8 +327,27 @@ $(document).ready(function() {
 		 * Im safely assuming theres a timeout in the jsPlumb library, where it asynchronously
 		 * Refreshes endpoint positions... taking a small amount of time.
 		 */
+		draggingClass = false;
 		refreshAssocPos();		
 		$(this).css("box-shadow", $(this).attr("prev-box-shadow"));
+	});
+
+	/*
+	 * Association positions are redrawn on html mouseup, and this is because if the class
+	 * is dragged to the boundary, and the mouseup event is fired when the mouse is NOT OVER THE CLASS then
+	 * the mouseup event wont fire for the class, but instead for the html element.
+	 * Therefore, binding the mouseup on the html element allows association line redrawing even if the class is attempted to be dragged
+	 * outside the schema boundary.
+	 */
+	$("html").on("mouseup", function() {
+		// If was dragging class
+		if (draggingClass) {
+			draggingClass = false;
+			// Redraw association lines
+			$(".class").trigger("mouseup");
+			refreshAssocPos();
+			$(this).css("box-shadow", $(this).attr("prev-box-shadow"));
+		}
 	});
 });
 
