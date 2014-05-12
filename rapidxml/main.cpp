@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {    
       file<> fdoc("information.xml");
-      //std::cout<<fdoc.data()<<std::endl; 
+      std::cout<<fdoc.data()<<std::endl; 
       xml_document<>   doc;    
       doc.parse<0>(fdoc.data()); 
 

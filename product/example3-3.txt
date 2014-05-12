@@ -8,4 +8,28 @@ Car{	rego		ID1,
 	model,
 	made };
 
+Building
+{ building_number	ID,
+  name 
+};
+
+
 Person AS owner[*] Owns [1..10]Car;
+
+
+Office
+{ area
+};
+
+Hall
+{ area
+};
+
+Toilet
+{ area
+};
+
+
+Building[1] Consists-of[0..1] Office;
+Building[1] Consists-of[0..1] Hall;
+Building[1] Consists-of[0..1] Toilet;

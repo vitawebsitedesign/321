@@ -49,16 +49,16 @@ $.each(classArr, function(k, className) {
 			var attrId = $(this).children(TAG_ATTR_ID).text();
 			var attrMulti = $(this).children(TAG_ATTR_MULTIPLICITY).text();
 			addAttr(attrName, attrMulti, $curClassDOM, attrId);
-		});
 
-		// Derived attributes
-		$(xmlDoc).find(TAG_ATTR_DERIVED).each(function() {
-			var attrName = "/" + $(this).children(TAG_ATTR_NAME).text();
-			var attrId = $(this).children(TAG_ATTR_ID).text();
-			var attrMulti = $(this).children(TAG_ATTR_MULTIPLICITY).text();
-			addAttr(attrName, attrMulti, $curClassDOM, attrId);
-		});
+			// Derived attributes
+			$(this).children(TAG_ATTR_DERIVED).each(function() {
+				var attrName = "/" + $(this).children(TAG_ATTR_NAME).text();
+				var attrId = $(this).children(TAG_ATTR_ID).text();
+				var attrMulti = $(this).children(TAG_ATTR_MULTIPLICITY).text();
+				addAttr(attrName, attrMulti, $curClassDOM, attrId);
+			});
 
+		});
 	}
 });
 

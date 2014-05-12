@@ -1,7 +1,16 @@
-Male{ };
+Student 
+{ s#	ID,
+  fname,
+  lname,
+  dob };
 
-Female{ };
+Subject
+{ code		ID,
+  title,
+  credits 
+};
 
-Person{ };
+Enrolment
+{  };
 
-Male, Female ISA(t-e) Person;
+Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 

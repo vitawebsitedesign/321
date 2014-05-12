@@ -3,8 +3,7 @@ Building
   name 
 };
 
-Room
-{ room_number,
-  area,
-  type 
-};
+Student 
+{ student#	,
+  name,
+  dob };

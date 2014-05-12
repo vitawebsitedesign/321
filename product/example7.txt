@@ -2,11 +2,12 @@ Campus
 { cname ID };
 
 Building
-{  };
+{ bldg_num  };
 
 Room
-{area };
+{ room_num	,
+  area };
 
-Campus(bldg_num) [1]Includes[1..*] Building;
+Campus(bldg_num) [1]Includes[0..1] Building;
 
-Building(room_num) [0..1]Includes[1..*] Room;
+Building(room_num) [0..1]Includes[0..1] Room;

@@ -1,16 +1,14 @@
 Student 
-{ s#	ID,
-  fname,
-  lname,
+{ student#	ID,
+  name,
   dob };
 
-Subject
-{ code		ID,
-  title,
-  credits 
+Undergradute_student
+{ 
 };
 
-Enrolment
-{  };
+Postgraduate_student
+{scholarship 
+};
 
-Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 
+Undergradute_student, Postgraduate_student ISA(t-e) Student;

@@ -1,3 +1,6 @@
 ~Error: Attributes used in qualification must be removed from a class on the other side of qualification
 ~Error: Wrong multiplicity on the other side of qualification
-~Error: Attributes used in qualification must be removed from a class on the other side of qualification
+~Error: The class: Office has no identifer
+~Error: The class: Hall has no identifer
+~Error: The class: Toilet has no identifer
+~Warning:Office and Hall and Toilet can be generated to one class 
