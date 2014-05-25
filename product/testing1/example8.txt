@@ -1,0 +1,8 @@
+Building
+{	
+	bldg-name	ID1,
+	address 	ID2,
+	construction-date,
+	construction-company[1..*],
+	total-costs[1..*]
+};

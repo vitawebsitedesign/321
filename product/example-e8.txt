@@ -1,0 +1,12 @@
+Building
+{ 
+	building_number ID,
+	name
+};
+Room
+{ 
+	room_number,
+	area,
+	type
+};
+Building(room_number) [1]Contains[0..1] Room;

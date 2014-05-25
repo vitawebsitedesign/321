@@ -1,0 +1,25 @@
+Sender
+{
+	name,
+        city,
+	street,
+	house#,
+	senderID ID
+};
+Recipient
+{
+	name,
+	city,
+	street,
+	house#,
+ 	recipientID ID
+};
+
+Parcel
+{
+	post-date,
+	fee,
+	weight,
+	parcelID ID
+};
+Sender [*]Sends-to:Parcel[*] Recipient; 

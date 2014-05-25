@@ -1,0 +1,16 @@
+Lecture 
+{
+  lecture_first_name  ID,
+  lecture_last_name   ID,
+  dob, 
+  address
+};
+
+Subject
+{ 
+  code		ID,
+  title,
+  credit, 
+  lecture_first_name ,
+  lecture_last_name
+};

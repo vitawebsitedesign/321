@@ -1,12 +1,16 @@
 Person{ 	
-	ssno		ID1,
+	ssno		ID,
 	name,
 	date_of_birth,
 	address };
 
-Car{	rego		ID1,
+Car{	rego		ID,
 	producer,
 	model,
 	made };
 
-Person AS driver [*]Drives[*] Car;
+Owing
+{
+};
+
+Person AS onwer [1]Owns:Owing[*] Car;

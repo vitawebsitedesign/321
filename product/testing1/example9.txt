@@ -1,0 +1,19 @@
+Person{ 	
+	
+	ssno		ID1,
+	
+	name		ID2,
+	
+	date_of_birth	ID2,
+	
+	address		ID2,
+	
+	/age,
+	
+	emails 	,
+	
+	phones,
+	
+	country[0..1]	
+
+};

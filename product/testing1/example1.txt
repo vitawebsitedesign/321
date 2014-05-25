@@ -5,21 +5,8 @@ Building
 
 Room
 {
+  area,
+  type 
 };
-
-Office
-{ area
-};
-
-Hall
-{ area
-};
-
-Toilet
-{ area
-};
-
 
 Building(room_number)[1]Contains[0..1] Room;
-
-Office, Hall, Toilet ISA(t-e) Room;

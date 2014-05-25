@@ -1,0 +1,58 @@
+Student 
+{ student# 	ID,
+  name,
+  dob, 
+  address,
+  /age,
+	
+  email [1..5],
+	
+  phone[*],
+  nationality[0..1]
+};
+
+Subject
+{ code		ID,
+  title,
+  credits 
+};
+
+Enrolment
+{  };
+
+Undergradute_student
+{ 
+};
+
+Postgraduate_student
+{scholarship 
+};
+
+Campus 
+{ cname ID 
+};
+
+Building
+{ building_number ,
+  name 
+};
+
+Office
+{ area
+};
+
+Hall
+{ area
+};
+
+Toilet
+{ area
+};
+Student [*]Study-at[1] Campus;
+Campus(building_number) [1]Includes[1..*] Building;
+Building[1] Consists-of[1..*] Office;
+Building[1] Consists-of[1..*] Hall;
+Building[1] Consists-of[1..*] Toilet;
+
+Undergradute_student, Postgraduate_student ISA(p-e) Student;
+Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 

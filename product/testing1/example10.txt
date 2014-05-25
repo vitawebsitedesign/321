@@ -13,4 +13,4 @@ Subject
 Enrolment
 {  };
 
-Student [*]Enrols(enrolment_date):Enrolment[1..*] Subject; 
+Student [1]Enrols(enrolment_date):Enrolment[1] Subject;

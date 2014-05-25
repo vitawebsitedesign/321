@@ -1,0 +1,13 @@
+Campus 
+{ cname ID };
+
+Building
+{ bldg_num  };
+
+Room
+{ room_num	,
+  area };
+
+Campus(bldg_num) [1]Includes[0..1] Building;
+
+Building(room_num) [1]Includes[0..1] Room;

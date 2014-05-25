@@ -1,0 +1,13 @@
+User{ 
+	uid ID1,
+	password 
+};
+Directory{ 
+	path ID,
+	dname ID,
+	tot_file_number 
+};
+
+User AS owner [1]Owns[*] Directory;
+User AS authorized_user [*]Can_access[*] Directory;
+Directory AS container[0..1]Contains[*] Directory AS element_of;

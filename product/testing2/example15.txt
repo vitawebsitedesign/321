@@ -1,0 +1,15 @@
+Course_description{};
+
+Course{};
+
+Assessment_specification{};
+
+Assessment{};
+
+Course [1..*]Has_description [1]Course_description;
+
+Course [1..*]Consists_of[1..*] Assessment;
+
+Course_description [1..*]Consists_of [5..7]Assessment_specification;
+
+Assessment [1..*]Has_specification [0..*]Assessment_specification;

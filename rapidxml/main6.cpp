@@ -4,17 +4,9 @@
 #include "rapidxml_print.hpp"
 #include <string.h>
 #include <string>
-#include <map>
 
 using namespace rapidxml;
 using namespace std;
-
-struct path
-{
-    map<string,string> pathElement;
-    int pathID;
-    path *next;
-};
 
 void IDchecker(int classamount, int i, string IDerror[],string genClass[],string quaClass[],string linkClass[], int classCount,string oto[][2],int io ,ofstream& ofs);
 void missInhertence(int genClasscount,int attCount ,int classCount,string genClass[], string att[][100], ofstream& ofs);
@@ -26,155 +18,7 @@ void multivaluedAtt(string muti[], ofstream& ofs, int m);
 void pluralCheck(char* pattern, ofstream& ofs, char* multi);
 void ArtiID(char* attribute,  xml_node<> *node, ofstream& ofs);
 void emptyLinkAtt(string& tmpname, xml_node<> *node , ofstream& ofs);
-void cycAssocation(string cycClass[],int cyc,ofstream& ofs);
-path *searchPath(path *pHead, string start,string terminus, bool &found, ofstream& ofs);
 
-
-path *searchPath(path *pHead, string start,string terminus, bool &found, ofstream& ofs)
-{
-    path *pDest = pHead;
-  
-    while(pDest != NULL)
-    {
-                     map<string,string>::iterator ita;
-                     int i;
-                     for (i =0, ita = pDest->pathElement.begin(); ita != pDest->pathElement.end(); i++, ita++)
-                          {
-                       
-                                if(ita -> second == start && found == false )
-                                 {  
-                                     map<string,string>::iterator iita;
-                                        int ii;
-                                      for (ii =0, iita = pDest->pathElement.begin(); iita != pDest->pathElement.end(); ii++, iita++)
-                                      {
-                                         
-                                          if(iita -> second == terminus )
-                                          {
-                                                cout<<"Warming:  Class <"<<start<<"> connect to Class <"<<terminus<<">  forms a Cycling Assocation"<<endl;
-                                                 ofs<<"~Warming:  Class <"<<start<<"> connect to Class <"<<terminus<<">  forms a Cycling Assocation"<<endl;
-                                                                                        
-                                          }
-                                          else 
-                                          {
-                                              path *temp = pHead;
-                                              while(temp != NULL)
-                                              {
-                                                  map<string,string>::iterator iiita;
-                                                         int iii;
-                                                  for (iii =0, iiita = temp->pathElement.begin(); iiita != temp->pathElement.end(); iii++, iiita++)
-                                                  {
-                                                     if(iita -> second == terminus )
-                                                     {
-                                                       for (iii =0, iiita = temp->pathElement.begin(); iiita != temp->pathElement.end(); iii++, iiita++)
-                                                       { 
-                                                           if(iiita ->second != "")
-                                                           pDest->pathElement[iiita ->second] = iiita ->second;
-                                                       }
-                                                     }
-                                                  }
-                                                  temp = temp->next;
-                                              }
-                                             
-                                          }
-                                      }
-                                   
-                                    found = true;
-                                 }
-                                else if(ita -> second == terminus && found == false )
-                                {
-                                    map<string,string>::iterator iita;
-                                        int ii;
-                                      for (ii =0, iita = pDest->pathElement.begin(); iita != pDest->pathElement.end(); ii++, iita++)
-                                      {
-                                          if(iita -> second == start )
-                                          {
-                                              cout<<"Warming:  Class <"<<start<<"> connect to Class <"<<terminus<<">  forms a Cycling Assocation"<<endl;
-                                              ofs<<"~Warming:  Class <"<<start<<"> connect to Class <"<<terminus<<">  forms a Cycling Assocation"<<endl;
-                                          }
-                                          else
-                                          {
-                                               path *temp = pHead;
-                                              while(temp != NULL)
-                                              {
-                                                  map<string,string>::iterator iiitaa;
-                                                         int iiia;
-                                                  for (iiia =0, iiitaa = temp->pathElement.begin(); iiitaa != temp->pathElement.end(); iiia++, iiitaa++)
-                                                  {
-                                                     if(iita -> second == start )
-                                                     {
-                                                       for (iiia =0, iiitaa = temp->pathElement.begin(); iiitaa != temp->pathElement.end(); iiia++, iiitaa++)
-                                                       { 
-                                                           if(iiitaa ->second != "")
-                                                           pDest->pathElement[iiitaa ->second] = iiitaa ->second;
-                                                       }
-                                                     }
-                                                  }
-                                                  temp = temp->next;
-                                              }
-                                          }
-                                         
-                                      }
-                                        found = true;
-                                }
-                          }
-                     
-                     pDest = pDest ->next;
-    }
-    
-     
-     return pHead;
-}
-
-void cycAssocation(string cycClass[], int cyc, ofstream& ofs)
-{
-    path *pHead, *pNew, *pRear;
-    int ID = 0;
-    for(int i =0 ; i <cyc; i = i+2)
-    {
-         pNew = new path;
-        if(i == 0)
-        {
-            
-         pNew->pathID = ID;
-         pNew->pathElement [cycClass[i]]= cycClass[i];
-         pNew->pathElement [cycClass[i+1]] = cycClass[i+1];
-         pRear = pHead = pNew;
-         ID++;           
-        }
-        else
-        {
-            bool found = false;
-            if(cycClass[i] == cycClass[i+1])
-                i = i+2;
-          searchPath(pHead,cycClass[i], cycClass[i+1], found,ofs);
-          
-                 if (found == false)
-                 {
-                        pNew -> pathID = ID;
-                        pNew -> pathElement[cycClass[i]] = cycClass[i]; 
-                        pNew -> pathElement[cycClass[i+1]] = cycClass[i+1]; 
-                        pRear -> next = pNew;
-                        ID++;
-                  }
-                 else if(found)
-                 {
-                     pRear -> pathElement[cycClass[i]] = cycClass[i]; 
-                     pRear -> pathElement[cycClass[i+1]] = cycClass[i+1]; 
-                     pNew = pRear;
-                     pRear -> next = pNew;
-                     
-                 }
-         
-    
-        }
-          
-        pNew->next = NULL;
-        pRear = pNew;
-       
-    }
-    
-  
-}
 
 void emptyLinkAtt(string& tmpname,xml_node<> * node, ofstream& ofs)
 {
@@ -254,7 +98,7 @@ void linkedMuti(bool linked, string muti[], ofstream& ofs)
     if(linked && (muti[0] == "[1]" || muti[0] == "[0..1]" || muti[1] == "[1]" || muti[1] == "[0..1]") )
     {
         ofs<<"~ Error: Link attribute or association class can not used for one-to-one or one-to-many association."<<endl;
-        cout<<"Error: Link attribute or association class can not used for one-to-one or one-to-many association."<<endl;
+        cout<<"~Error: Link attribute or association class can not used for one-to-one or one-to-many association."<<endl;
     }
 }
 
@@ -288,7 +132,6 @@ void checkMuti(bool qulification,char* pNode3name,char* pNode3value, ofstream& o
 
 void missGen(int genAssCount, string genAss[][3], ofstream& ofs)
 {
-    
      int CountSameRow[genAssCount][genAssCount];
       int SameRow[genAssCount];
      for(int i =0; i< genAssCount; i++)
@@ -338,7 +181,7 @@ void missGen(int genAssCount, string genAss[][3], ofstream& ofs)
                   {
                    ofs<<" can be generated to one class "<<endl;
                    cout<<" can be generated to one class"<<endl;
-                  }
+                   }
           }
                  
           
@@ -483,9 +326,6 @@ int main()
       string linkClass[100];  // store linked classes
       string oto[100][2];
       string tmpname;       //store 
-      string cycClass[100];
-     
-      int cyc = 0;
       int io = 0; // count one to one cases;
       int genAssCount = 0;
       int classCount = 0;
@@ -607,9 +447,6 @@ int main()
                                         {
                                       
                                              genAss[genAssCount][1] = pNode3->value();
-                                             cycClass[cyc] = pNode3->value();
-                                           
-                                             cyc++;
                                        
                                             
                                         }
@@ -618,10 +455,6 @@ int main()
                                         {
                                       
                                              genAss[genAssCount][2] = pNode3->value();
-                                            
-                                               cycClass[cyc] = pNode3->value();
-                                            
-                                               cyc++;
                                           
                                                genAssCount++;
                                             
@@ -715,15 +548,16 @@ int main()
                         }
                     classCount++;
                     
-                }      
+                }
+                
+                
+                 
               
       } // loop 1
-     
      
      IDchecker(classamount,i, IDerror,genClass,quaClass,linkClass, classCount, oto,io ,ofs);
      missInhertence(genClasscount,attCount,classCount,genClass, att, ofs);
      missGen(genAssCount,genAss,ofs);
-     cycAssocation(cycClass,cyc,ofs);
     
      ofs.close();
  

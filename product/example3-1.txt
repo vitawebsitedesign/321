@@ -1,0 +1,14 @@
+Student 
+{ student#	ID,
+  name,
+  dob };
+
+Undergradute_student
+{ 
+};
+
+Postgraduate_student
+{scholarship 
+};
+
+Undergradute_student, Postgraduate_student ISA(t-e) Student;

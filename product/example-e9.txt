@@ -1,0 +1,9 @@
+StockExchange
+{ 
+	location ID 
+};
+Company
+{ 
+	ticker_symbol 
+};
+StockExchange(ticker_symbol) [1..*]Lists[0..1] Company;

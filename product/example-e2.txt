@@ -1,0 +1,13 @@
+Person{ 
+	ssno ID1,
+	name,
+	date_of_birth,
+	address 
+};
+Car{ 
+	rego ID1,
+	producer,
+	model,
+	made 
+};
+Person AS driver [*]Drives[*] Car;

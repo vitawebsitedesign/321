@@ -8,4 +8,4 @@ Car{ rego,
      model,
      made };
 
-Person AS owner[1] Owns [1]Car;
+Person[1] AS owner Owns [1]Car;

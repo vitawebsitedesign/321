@@ -4,7 +4,7 @@ Building{
 };
 
 Room{	
-	room_number	ID,
+	room_number	,
 	area,
 	type 
 };

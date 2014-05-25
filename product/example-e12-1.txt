@@ -1,7 +1,4 @@
 Male{ };
-
 Female{ };
-
 Person{ };
-
 Male, Female ISA(t-e) Person;
