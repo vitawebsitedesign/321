@@ -34,6 +34,7 @@ function addClass($className) {
 		"width": (CLASS_WIDTH_CONSTANT / CLASSES_PER_ROW) + "%",
 		"opacity": (($className == "") ? 0 : 1)
 	});
+
 	$("<div/>", {
 		class: "class-title",
 		text: $className

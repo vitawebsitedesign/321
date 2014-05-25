@@ -1,1 +1,1 @@
-var errMsgs=[{"class":"","msg":"Error: The class: Student has no identifer"}];
+var errMsgs=[{"class":"","msg":"Warning: Assocation <Supervises>has empty link attributes"}];

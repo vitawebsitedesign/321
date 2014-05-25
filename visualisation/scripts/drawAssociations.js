@@ -271,9 +271,10 @@ jsPlumb.ready(function() {
 				overlays: assocQualLabel
 			});
 
+			// Remove link class titles
 			if (className[0] == "!") {
-				$curClassDOM.children(".class-title").remove();
-			}
+				$curClassDOM.children(".class-title").text("");
+			}			
 		}
 	});
 

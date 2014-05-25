@@ -6,5 +6,5 @@ Person{ 	ssno		ID,
 Company{	name		ID,
 		address };
 
-Person [*]Employed_by{}[*] Company;
+Person [*]Employed_by{saidaskdjh}[*] Company;
 Person [0..1]Supervises{}[*] Person;
