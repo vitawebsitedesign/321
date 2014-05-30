@@ -1,1 +1,6 @@
-~Warning: Assocation <Supervises>has empty link attributes
+~line:98:	error: multiplicity is compulsory of the left class
+~ Error: Link attribute or association class can not used for one-to-one or one-to-many association.
+~ Error: Link attribute or association class can not used for one-to-one or one-to-many association.
+~ Error: Link attribute or association class can not used for one-to-one or one-to-many association.
+~ Error: Link attribute or association class can not used for one-to-one or one-to-many association.
+~ Error: Link attribute or association class can not used for one-to-one or one-to-many association.

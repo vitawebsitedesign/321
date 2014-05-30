@@ -1,0 +1,16 @@
+call go.bat example-e1.txt
+call go.bat example-e2.txt
+call go.bat example-e3.txt
+call go.bat example-e4.txt
+call go.bat example-e5.txt
+call go.bat example-e6.txt
+call go.bat example-e7.txt
+call go.bat example-e8.txt
+call go.bat example-e9.txt
+call go.bat example-e10-1.txt
+call go.bat example-e10-2.txt
+call go.bat example-e11.txt
+call go.bat example-e12-1.txt
+call go.bat example-e12-2.txt
+call go.bat example-e13.txt
+call go.bat exampletest.txt

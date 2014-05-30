@@ -1,0 +1,98 @@
+Boat{ 	
+	
+
+};
+
+River{ 	
+	
+
+};
+
+Boat_Sailing{
+};
+Boat [*]Sail_on:Boat_Sailing[*] River;
+
+Ship{ 	
+	
+
+};
+
+Sea{ 	
+	
+
+};
+
+Ship_Sailing{
+};
+
+Ship [*]Sail_On:Ship_Sailing[*] Sea;
+ 
+Bow{ 	
+	
+
+};
+
+Tree{ 	
+	
+
+};
+
+Heaven{
+};
+
+Bow_Overtopping{
+};
+
+Bow_Bridging{
+};
+
+Bow [1]Overtops:Bow_Overtopping[*] Tree;
+Bow [1]Bridges:Bow_Bridging[1] Heaven;
+
+Road{ 	
+	
+
+};
+
+Earth{
+};
+
+Sky{
+};
+Bow_Building{
+};
+
+Earth [1]To:Road[*] Sky;
+Bow [1]Builds:Bow_Building[1] Road;
+
+Bridge{ 	
+	
+
+};
+Bridge_Building{
+Pretty_level
+};
+Bridge [*]Is_On:Bridge_Building[*] River;
+
+Water_Vehicle_Sailing{
+};
+Boat_Sailing, Ship_Sailing ISA(p-e) Water_Vehicle_Sailing;
+
+Cloud{ 	
+	
+
+};
+
+Cloud_Sailing{
+};
+
+Cloud [*]Sail_Across:Cloud_Sailing[1] Sky;
+
+Cloud_Sailing[1] Prettier_Than [1]Water_Vehicle_Sailing;
+
+Bow_Construction{
+};
+
+Bow_Overtopping, Bow_Building, Bow_Bridging ISA(t-e) Bow_Construction;
+
+Bow_Construction Prettier_Far_Than Bridge_building;
